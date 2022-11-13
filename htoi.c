@@ -1,59 +1,83 @@
 #include <stdio.h>
+#include <math.h>
 #include "htoi.h"
 
-int htoi(char *st){
-    printf("%s", st);
-    char c = st[0];
-    printf("\nCharacter at 0: %c\n", c);
-    return 1;
-}
+/*  TODO:
+    1. Fix bug after O------, stackdumps.
+    2. Document literally everything.
+    3. Test edge cases.
+
+
+*/
+
 
 
  int equiv(char c){
     switch(c){
+        case '0' :
+            return 0;
+        case '1' :
+            return 1;
+        case '2' :
+            return 2;
+        case '3' :
+            return 3;
+        case '4' :
+            return 4;
+        case '5' :
+            return 5;
+        case '6' :
+            return 6;
+        case '7' :
+            return 7;
+        case '8' :
+            return 8;
+        case '9' :
+            return 9;
         case 'a' :
-            return 11;
+            return 10;
         case 'A' :
-            return 11;
+            return 10;
         case 'b' :
-            return 12;
+            return 11;
         case 'B' :
-            return 12;
+            return 11;
         case 'c' :
-            return 13;
+            return 12;
         case 'C' :
-            return 13;
+            return 12;
         case 'd' :
-            return 14;
+            return 13;
         case 'D' :
-            return 14;
+            return 13;
         case 'e' :
-            return 15;
+            return 14;
         case 'E' :
-            return 15;
+            return 14;
         case 'f' :
-            return 16;
+            return 15;
         case 'F':
-            return 16;
+            return 15;
         default :
             return -1;
     }
 
  }
 
-
-
 /*
+    Author: Evann Hall
+    Description:
+
     The purpose of this function is to quickly and easily retrieve an integer value for the length of a character array, without using external headers.
+
 */
 const int len(char *st){
-    
     int x = 0;
     while(st[x] != '\0')x+=1; //count up, return x as length.
     return x;
 }
 
-const char *testString(char *st){
+const char *convString(char *st){
 
     char first = st[0];
     char second = st[1];
@@ -66,7 +90,6 @@ const char *testString(char *st){
     if(second == 'x' || second == 'X') {
 
     int x = 2;
-    int length;
     char nextChar = st[x];
     static char retStr[100]; //ensure enough space is available for string, should not occupy this much, but my compiler will not dynamically assign.
     
@@ -92,20 +115,28 @@ const char *testString(char *st){
 
 }
 
+int htoi(char *st){
+    
+    int length = len(st);
+    int e, total;
+    
+    for(int x = length - 1; x > -1; x--){
+        e = equiv(st[x]);
+        if(e == -1){printf("bad char!"); break;}
+
+        total += e * pow(16, x);
+    }
+
+    return total;
+}
+
+
 int main(){
-
-
     char userString[100];
     scanf("%s", userString);
-
-
-    char* testStr = testString(userString);
+    char* testStr = convString(userString);
     int length = len(testStr);
-
-    printf("Length: %i\n", length);
-    
-    printf("Test '%c' Results: %i", testStr[0], equiv(testStr[0]));
-    
+    printf("RESULT: %i", htoi(testStr));
 
     return 0;
 }
