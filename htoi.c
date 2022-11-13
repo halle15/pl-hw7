@@ -8,6 +8,41 @@ int htoi(char *st){
     return 1;
 }
 
+
+ int equiv(char c){
+    switch(c){
+        case 'a' :
+            return 11;
+        case 'A' :
+            return 11;
+        case 'b' :
+            return 12;
+        case 'B' :
+            return 12;
+        case 'c' :
+            return 13;
+        case 'C' :
+            return 13;
+        case 'd' :
+            return 14;
+        case 'D' :
+            return 14;
+        case 'e' :
+            return 15;
+        case 'E' :
+            return 15;
+        case 'f' :
+            return 16;
+        case 'F':
+            return 16;
+        default :
+            return -1;
+    }
+
+ }
+
+
+
 /*
     The purpose of this function is to quickly and easily retrieve an integer value for the length of a character array, without using external headers.
 */
@@ -67,11 +102,10 @@ int main(){
     char* testStr = testString(userString);
     int length = len(testStr);
 
-    printf("Length: %i", length);
+    printf("Length: %i\n", length);
     
+    printf("Test '%c' Results: %i", testStr[0], equiv(testStr[0]));
     
-    
-
 
     return 0;
 }
